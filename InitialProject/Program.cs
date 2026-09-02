@@ -1,4 +1,6 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using System.ComponentModel.DataAnnotations;
+
+Console.WriteLine("Hello, World!");
 Console.WriteLine("Hello, Juh!");
 Console.WriteLine("Hello, Deh!");
 
@@ -12,7 +14,7 @@ float myNumberFloat = 0.0f;
 int myNumberInt = 0;
 
 //IEnumerable
-var myList = new List<string>() { "a", "b", "c"};
+var myList = new List<string>() { "a", "b", "c" };
 myList.Add(myVariable);
 var count = myList.Count;
 
@@ -21,7 +23,7 @@ var myArray = new[] { "a", "b", "c" };
 //Iterações
 foreach (var item in myList)
 {
-    Console.WriteLine(item);    
+    Console.WriteLine(item);
 }
 
 for (int i = 0; i < myList.Count; i++)
@@ -63,3 +65,62 @@ for (int i = 0; i < myList.Count; i++)
 //Correct! (+0.5 points)   Score: 1.5
 
 //Random.Shared.Shuffle(words);
+
+//if (age > 60)
+//{
+//    Console.WriteLine("He is old");
+//}
+//else if (age > 40)
+//{
+//    Console.WriteLine("He is middle age");
+//}
+//else if (age > 20)
+//{
+//    Console.WriteLine("y");
+//}
+//else if (age > 10)
+//{
+//    Console.WriteLine("x");
+//}
+//else
+//{
+//    Console.WriteLine("He is young");
+//}
+
+var ages = new List<int>() { 80, 20, 40, 50, 60 };
+
+foreach (var age in ages) //Early return -> retorno cedo
+{
+    if (age > 60)
+    {
+        Console.WriteLine("He is old");
+        continue;
+    }
+
+    if (age > 40)
+    {
+        Console.WriteLine("He is middle age");
+    }
+
+    if (age > 20)
+    {
+        Console.WriteLine("y");
+    }
+
+    if (age > 10)
+    {
+        Console.WriteLine("x");
+        break;
+    }
+
+    if (age <= 10)
+    {
+        Console.WriteLine("He is young");
+    }
+}
+
+public class Person 
+{
+    public string Name;
+    public int Age;
+}
