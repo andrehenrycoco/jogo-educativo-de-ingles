@@ -12,7 +12,7 @@ float myNumberFloat = 0.0f;
 int myNumberInt = 0;
 
 //IEnumerable
-var myList = new List<string>() { "a", "b", "c"};
+var myList = new List<string>() { "a", "b", "c" };
 myList.Add(myVariable);
 var count = myList.Count;
 
@@ -21,7 +21,7 @@ var myArray = new[] { "a", "b", "c" };
 //Iterações
 foreach (var item in myList)
 {
-    Console.WriteLine(item);    
+    Console.WriteLine(item);
 }
 
 for (int i = 0; i < myList.Count; i++)
@@ -63,3 +63,10 @@ for (int i = 0; i < myList.Count; i++)
 //Correct! (+0.5 points)   Score: 1.5
 
 //Random.Shared.Shuffle(words);
+
+
+var score = 0;
+var list = new List<string>() { "how many children do you have ?", "" };
+Console.WriteLine(list[0]);
+
+
