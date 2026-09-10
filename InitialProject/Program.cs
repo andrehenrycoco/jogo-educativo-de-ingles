@@ -87,48 +87,125 @@ for (int i = 0; i < myList.Count; i++)
 //    Console.WriteLine("He is young");
 //}
 
-var ages = new List<int>() { 80, 20, 40, 50, 60 };
+//var ages = new List<int>() { 80, 20, 40, 50, 60 };
 
-foreach (var age in ages) //Early return -> retorno cedo
+//foreach (var age in ages) //Early return -> retorno cedo
+//{
+//    if (age > 60)
+//    {
+//        Console.WriteLine("He is old");
+//        continue;
+//    }
+
+//    if (age > 40)
+//    {
+//        Console.WriteLine("He is middle age");
+//    }
+
+//    if (age > 20)
+//    {
+//        Console.WriteLine("y");
+//    }
+
+//    if (age > 10)
+//    {
+//        Console.WriteLine("x");
+//        break;
+//    }
+
+//    if (age <= 10)
+//    {
+//        Console.WriteLine("He is young");
+//    }
+//}
+
+//public class Person 
+//{
+//    public string Name;
+//    public int Age;
+//}
+
+
+var score = 0.0;
+var list = new List<string>()
+{ 
+    "how many children do you have ?",
+    "is your job interesting ?",
+    "what color is his car ?",
+    "where does your brother work ?",
+    "do you work with computers ?",
+    "what kind of magazines do you read ?",
+    "what does he do on the weekend ?",
+    "are you stressed in your job ?",
+    "where does your sister live ?",
+    "how do you say that in English ?"
+};
+
+for (int i = 0; i < list.Count; i++)
 {
-    if (age > 60)
-    {
-        Console.WriteLine("He is old");
-        continue;
-    }
+    var myTry = 0;
+    bool correct = false;
 
-    if (age > 40)
-    {
-        Console.WriteLine("He is middle age");
-    }
+    string[] words = list[i].Split(" ");
+    Random.Shared.Shuffle(words);
+    string wordsScrambled = string.Join(" / ", words);
+    Console.WriteLine(wordsScrambled);
 
-    if (age > 20)
+    while (!correct && myTry < 3)
     {
-        Console.WriteLine("y");
-    }
 
-    if (age > 10)
-    {
-        Console.WriteLine("x");
-        break;
-    }
+        Console.WriteLine("What is the correct form?");
+        Console.Write(" ");
+        string userResponse = Console.ReadLine();
+        Console.WriteLine(userResponse);
 
-    if (age <= 10)
-    {
-        Console.WriteLine("He is young");
+        if (userResponse == list[i])
+        {
+            Console.WriteLine("Está certo, parabéns");
+            score = score + 1;
+            Console.WriteLine("Sua nota é:" + score);
+            correct = true;
+        }
+
+        if (userResponse != list[i])
+        {
+            Console.WriteLine("Errou");
+            myTry = myTry + 1;
+
+            if (myTry < 3)
+            {
+
+                Console.Write("Quer uma dica? (true/false)");
+                string hit = Console.ReadLine();
+
+                if (hit.ToLower() == "true")
+                {
+
+                    if (myTry == 1)
+                    {
+                        string firstWord = list[i].Split(' ')[0];
+                        Console.WriteLine("Dica: A frase começa com a palavra com " + firstWord);
+                        score = score - 0.25f;
+                        Console.WriteLine("Sua nota atual é:" + score);
+                    }
+
+                    if (myTry == 2)
+                    {
+                        string secondWord = list[i].Split(' ')[1];
+                        Console.WriteLine("Dica: a segunda palavra é: " + secondWord);
+                        score = score - 0.25f;
+                        Console.WriteLine("Sua nota atual é:" + score);
+                    }
+
+                }
+            }
+        }
+
+        if (myTry == 3)
+        {
+            Console.WriteLine("Game over!");
+        }
+
     }
 }
-
-public class Person 
-{
-    public string Name;
-    public int Age;
-}
-//Random.Shared.Shuffle(words);
-
-
-var score = 0;
-var list = new List<string>() { "how many children do you have ?", "" };
-Console.WriteLine(list[0]);
-
-
+Console.WriteLine($"Sua pontuação final foi: {score} de 10 pontos.");
