@@ -5,6 +5,15 @@
 // 3. A comparação de strings seja "case insensitive"
 // 4. Quando der GameOver, pergunte para o usuário se ele quer começar um novo jogo.
 
+public class Program
+{
+    public static void Main()
+    {
+        var game01 = new Game01();
+        game01.Execute();
+    }
+}
+
 public class Game01
 {
     public void Execute()
