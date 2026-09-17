@@ -11,6 +11,8 @@ public class Game01
     {
         var score = 0.0;
 
+      Console.WriteLine("hellou, mundo");
+
         var list = new List<string>()
         {
             "how many children do you have ?",
@@ -39,9 +41,8 @@ public class Game01
             {
 
                 Console.WriteLine("What is the correct form?");
-                Console.Write(" ");
+                Console.Write("");
                 string? userResponse = Console.ReadLine();
-                Console.WriteLine(userResponse);
 
                 if (userResponse == list[i])
                 {
