@@ -18,12 +18,15 @@ public class Game01
 {
     public void Execute()
     {
-        var score = 0.0;
+        bool playAgain = true;
 
-        Console.WriteLine("oi");
-
-        var list = new List<string>()
+        while (playAgain)
         {
+
+            var score = 0.0;
+
+            var list = new List<string>()
+            {
             "how many children do you have ?",
             "is your job interesting ?",
             "what color is his car ?",
@@ -34,122 +37,122 @@ public class Game01
             "are you stressed in your job ?",
             "where does your sister live ?",
             "how do you say that in English ?"
-        };
+            };
 
-        for (int i = 0; i < list.Count; i++)
-        {
-            var myTry = 0;
-            bool correct = false;
-
-            string[] words = list[i].Split(" ");
-            Random.Shared.Shuffle(words);
-            string wordsScrambled = string.Join(" / ", words);
-            Console.WriteLine(wordsScrambled);
-
-            string[] originalWords = list[i].Split(' ');
-            string[] tipWords = new string[originalWords.Length];
-
-            for (int j = 0; j < originalWords.Length; j++)
+            for (int i = 0; i < list.Count; i++)
             {
-                tipWords[j] = "-";
-            }
+                var myTry = 0;
+                bool correct = false;
 
-            bool askTip = true;
+                string[] words = list[i].Split(" ");
+                Random.Shared.Shuffle(words);
+                string wordsScrambled = string.Join(" / ", words);
+                Console.WriteLine(wordsScrambled);
 
-            while (!correct && myTry < 3)
-            {
+                string[] originalWords = list[i].Split(' ');
+                string[] tipWords = new string[originalWords.Length];
 
-
-                while (askTip)
+                for (int j = 0; j < originalWords.Length; j++)
                 {
-                    Console.Write("Quer uma dica? (true/false)");
-                    string? tip = Console.ReadLine();
+                    tipWords[j] = "-";
+                }
 
-                    if (tip != null && tip.Trim().ToLower() == "true")
+                bool askTip = true;
+
+                while (!correct && myTry < 3)
+                {
+
+
+                    while (askTip)
                     {
+                        Console.Write("Quer uma dica? (true/false)");
+                        string? tip = Console.ReadLine();
 
-                        List<int> wordIndices = new List<int>();
-
-
-                        for (int w = 0; w < tipWords.Length; w++)
+                        if (tip != null && tip.Trim().ToLower() == "true")
                         {
-                            if (tipWords[w] == "-")
+
+                            List<int> wordIndices = new List<int>();
+
+
+                            for (int w = 0; w < tipWords.Length; w++)
                             {
-                                wordIndices.Add(w);
+                                if (tipWords[w] == "-")
+                                {
+                                    wordIndices.Add(w);
 
+                                }
                             }
+
+
+                            if (wordIndices.Count > 1)
+                            {
+
+                                var randomIndex = Random.Shared.Next(0, wordIndices.Count);
+                                int wordToReveal = wordIndices[randomIndex];
+
+                                tipWords[wordToReveal] = originalWords[wordToReveal];
+
+                                score = score - 0.10;
+                                Console.WriteLine("Dica: " + string.Join(" ", tipWords));
+                                Console.WriteLine("Sua nota atual é: " + score);
+                            }
+
+
+                            else
+                            {
+                                Console.WriteLine("Consumiu todas as dicas");
+                                askTip = false;
+                            }
+
                         }
-
-
-                        if (wordIndices.Count > 1)
+                        else
                         {
-
-                            var randomIndex = Random.Shared.Next(0, wordIndices.Count);
-                            int wordToReveal = wordIndices[randomIndex];
-
-                            tipWords[wordToReveal] = originalWords[wordToReveal];
-
-                            score = score - 0.10;
-                            Console.WriteLine("Dica: " + string.Join(" ", tipWords));
-                            Console.WriteLine("Sua nota atual é: " + score);
-                        }
-
-
-                        if (wordIndices.Count == 1)
-                        {
-                            Console.WriteLine("Consumiu todas as dicas");
                             askTip = false;
                         }
-
-                        
-
-
                     }
-                    if (tip != null && tip.Trim().ToLower() == "false")
+
+                    Console.WriteLine("Dica: " + string.Join(" ", tipWords));
+                    Console.WriteLine("What is the correct form?");
+                    Console.Write("");
+                    string? userResponse = Console.ReadLine();
+
+                    string responseFormatted = userResponse != null ? userResponse.Replace(" ", "").ToLower() : "";
+                    string correctFormatted = list[i].Replace(" ", "").ToLower();
+
+                    if (responseFormatted == correctFormatted)
                     {
-                        Console.WriteLine("What is the correct form?");
+                        Console.WriteLine("Está certo, parabéns");
+                        score = score + 1;
+                        Console.WriteLine("Sua nota é:" + score);
+                        correct = true;
                     }
 
+                    if (responseFormatted != correctFormatted)
+                    {
+                        Console.WriteLine("Errou");
+                        myTry = myTry + 1;
+                        askTip = true;
+
+                        if (myTry == 3)
+                        {
+                            Console.WriteLine("Game over!");
+                        }
+
+                    }
 
                 }
-
-
             }
 
+            Console.Write("\nDeseja jogar novamente? (true/false): ");
+            string? respostaFim = Console.ReadLine();
 
-
-
-            Console.WriteLine("What is the correct form?");
-            Console.Write("");
-            string? userResponse = Console.ReadLine();
-
-            string responseFormatted = userResponse != null ? userResponse.Replace(" ", "") : "";
-            string correctFormatted = list[i].Replace(" ", "");
-
-            if (responseFormatted == correctFormatted)
+            if (respostaFim == null || respostaFim.Trim().ToLower() != "true")
             {
-                Console.WriteLine("Está certo, parabéns");
-                score = score + 1;
-                Console.WriteLine("Sua nota é:" + score);
-                correct = true;
+                playAgain = false;
+                Console.WriteLine("Obrigado por jogar!");
+
+                Console.WriteLine($"Sua pontuação final foi: {score} de 10 pontos.");
             }
-
-            if (responseFormatted != correctFormatted)
-            {
-                Console.WriteLine("Errou");
-                myTry = myTry + 1;
-
-
-
-                if (myTry == 3)
-                {
-                    Console.WriteLine("Game over!");
-                }
-
-            }
-
-
-            Console.WriteLine($"Sua pontuação final foi: {score} de 10 pontos.");
         }
 
     }
