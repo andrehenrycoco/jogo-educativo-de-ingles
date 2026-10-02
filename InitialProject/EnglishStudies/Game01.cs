@@ -61,11 +61,10 @@ public class Game01
                     }
 
                     var myTry = 0;
+                    var tipsCount = 0;
 
                     while (myTry < MAX_TRIES)
                     {
-                        var tipsCount = 0;
-
                         while (true)
                         {
                             Console.Write("Quer uma dica? (T/F)");
@@ -83,7 +82,12 @@ public class Game01
                             }
 
                             var random = new Random();
-                            var item = random.Next(0, words.Length - 1);
+                            var item = random.Next(0, words.Length);
+
+                            while (tipWords[item] != "-")
+                            {
+                                item = random.Next(0, words.Length);
+                            }
 
                             var trueWord = originalWords[item];
 
@@ -116,7 +120,7 @@ public class Game01
 
                         Console.WriteLine("Errou");
 
-                        if (myTry == MAX_TRIES)
+                        if (myTry == MAX_TRIES - 1)
                         {
                             startGame = true;
 
@@ -135,6 +139,16 @@ public class Game01
 
                         myTry++;
                     }
+
+                    if (!startGame)
+                    {
+                        break;
+                    }
+                }
+
+                if (!startGame)
+                {
+                    break;
                 }
 
                 Console.Write("\nDeseja jogar novamente? (T/F): ");
